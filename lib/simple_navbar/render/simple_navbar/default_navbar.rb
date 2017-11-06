@@ -11,11 +11,12 @@ module SimpleNavbar
         end
 
         def render
-          @view.haml_tag :div, :class => self.css_class do
-            @view.haml_tag :div, :class => self.inner_css_class do
-              _render_ul
-            end
-          end
+          _render_ul
+          # @view.haml_tag :div, :class => self.css_class do
+          #   @view.haml_tag :div, :class => self.inner_css_class do
+          #     _render_ul
+          #   end
+          # end
         end
 
       end

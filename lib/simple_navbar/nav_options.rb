@@ -14,5 +14,9 @@ module SimpleNavbar
     def name
       @options[:name] || I18n.t("simple-navbar.#{@nav.rule.title}.#{@nav.title}")
     end
+
+    def ico_class
+      @options[:ico_class]
+    end
   end
 end

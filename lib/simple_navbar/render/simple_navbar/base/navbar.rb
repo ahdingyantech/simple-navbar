@@ -9,8 +9,7 @@ module SimpleNavbar
             @view = view
             @items = []
 
-            @ul_class = options[:ul_class] || "sidebar-menu"
-            # @ul_class = options[:ul_class] || "nav"
+            @ul_class = options[:ul_class] || "nav"
             @class    = options[:class]    || "simple_navbar"
           end
 

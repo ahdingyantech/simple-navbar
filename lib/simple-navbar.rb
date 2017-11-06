@@ -1,7 +1,20 @@
+# -*- encoding : utf-8 -*-
+require 'simple-page-compoents'
 require 'simple_navbar/config'
-require 'simple_navbar/render'
+require 'simple_navbar/controller_item'
+require 'simple_navbar/current_context'
 require 'simple_navbar/helpers'
-require 'simple_navbar/base'
+require 'simple_navbar/nav_options'
+require 'simple_navbar/nav'
+require 'simple_navbar/rule'
+require 'simple_navbar/error'
+require 'simple_navbar/render/nav_item'
+
+module SimpleNavbar
+  class Base
+    extend SimpleNavbar::Config
+  end
+end
 
 if defined?(Rails)
 
@@ -9,7 +22,7 @@ if defined?(Rails)
     class Railtie < Rails::Railtie
 
       initializer 'SimpleNavbar.helper' do |app|
-        SimpleNavbar::Base.include_helper
+        ActionView::Base.send :include, SimpleNavbar::Helpers
       end
 
       config.to_prepare do
@@ -19,13 +32,6 @@ if defined?(Rails)
 
       generators do
         require File.expand_path("../../generators/simple_navbar_config_generator", __FILE__)
-      end
-
-      initializer 'SimpleNavbar.assets.precompile' do |app|
-        path = File.expand_path("../../", __FILE__)
-        %w(stylesheets).each do |sub|
-          app.config.assets.paths << File.join(path, 'assets', sub).to_s
-        end
       end
 
     end

@@ -40,15 +40,21 @@ SimpleNavbar::Base.config do
     nav :musics, :name => '音乐', :url => '/musics' do
       # 一个 nav 下支持配置多个 controller
       controller :musics
+      controller :pop_musics
+      controller :rock_musics
+      controller :punk_musics 
 
       nav :pop_musics, :url => '/musics/pop' do
         controller :pop_musics
+        controller :rock_musics
+        controller :punk_musics 
         # nav 支持任意层级的嵌套
         nav :rock_musics, :name => '摇滚音乐', :url => '/musics/pop/rock' do
           controller :rock_musics
+          controller :punk_musics 
 
-          nav :punk_musics, :name => '朋克', :url => '/musics/pop/rock/punk', :html => {:target => "abc"} do
-            controller :punk_musics
+          nav :punk_musics, :name => '朋克', :url => '/musics/pop/rock/punk' do
+            controller :punk_musics 
           end
         end
 
@@ -82,18 +88,5 @@ SimpleNavbar::Base.config do
     end
   end
 
-  rule :simple_navtabs_1 do
-    nav :books, :name => '书籍', :url => '/books' do
-      controller :books
-    end
-
-    nav :movies, :name => '电影', :url => '/movies' do
-      controller :movies
-    end
-
-    nav :musics, :name => '音乐', :url => '/musics' do
-      controller :musics
-    end
-  end
-
 end
+

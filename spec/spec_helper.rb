@@ -8,14 +8,7 @@ require 'haml'
 require 'simple-navbar'
 require 'nokogiri'
 
-RSpec.configure do |config|
-  config.expect_with :rspec do |c|
-    c.syntax = [:should, :expect]
-  end
-end
-
-SimpleNavbar::Base.include_helper
-
+ActionView::Base.send(:include, SimpleNavbar::Helpers)
 view = ActionView::Base.new
 class << view
   include Haml::Helpers
@@ -28,9 +21,9 @@ def view.params
     "action"     => "index"
   }
 end
-
 MOCK_VIEW = view
 
 # i18n
-I18n.load_path += [File.expand_path('../locales/zh-CN.yml',__FILE__)]
 I18n.locale = "zh-CN"
+
+I18n.load_path += [File.expand_path('../locales/zh-CN.yml',__FILE__)]
